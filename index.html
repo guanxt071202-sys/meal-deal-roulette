@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meal Deal Roulette 🎰</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #FFF8EE;
+    --card: #FFFFFF;
+    --accent: #FF4B2B;
+    --accent2: #FFB800;
+    --green: #1DB954;
+    --text: #1A1A1A;
+    --muted: #888;
+    --radius: 20px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 16px;
+    color: var(--text);
+    background-image: radial-gradient(circle at 10% 20%, #FFE0D0 0%, transparent 40%),
+                      radial-gradient(circle at 90% 80%, #FFF0C0 0%, transparent 40%);
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(42px, 8vw, 72px);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  h1 span { color: var(--accent); }
+
+  .subtitle {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .supermarket-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .pill {
+    padding: 4px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1.5px solid;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .pill.tesco   { border-color: #004f9e; color: #004f9e; background: transparent; }
+  .pill.ms      { border-color: #161616; color: #161616; background: transparent; }
+  .pill.sains   { border-color: #E4680F; color: #E4680F; background: transparent; }
+  .pill.boots   { border-color: #005EB8; color: #005EB8; background: transparent; }
+  .pill.pret    { border-color: #8B1D1D; color: #8B1D1D; background: transparent; }
+  .pill.active.tesco  { background: #004f9e; color: #fff; }
+  .pill.active.ms     { background: #161616; color: #fff; }
+  .pill.active.sains  { background: #E4680F; color: #fff; }
+  .pill.active.boots  { background: #005EB8; color: #fff; }
+  .pill.active.pret   { background: #8B1D1D; color: #fff; }
+
+  .result-area {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 820px;
+    margin-bottom: 36px;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 40px rgba(0,0,0,0.1); }
+
+  .card-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+  }
+  .card-stripe.main   { background: var(--accent); }
+  .card-stripe.snack  { background: var(--accent2); }
+  .card-stripe.drink  { background: var(--green); }
+
+  .card-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .card-label.main   { color: var(--accent); }
+  .card-label.snack  { color: #C98A00; }
+  .card-label.drink  { color: #17924A; }
+
+  .card-emoji { font-size: 36px; margin-bottom: 8px; display: block; line-height: 1; }
+
+  .card-item {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+    transition: all 0.4s ease;
+  }
+
+  .card-from {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  .card.rolling .card-item {
+    animation: roll 0.5s ease forwards;
+  }
+
+  @keyframes roll {
+    0%   { opacity: 1; transform: translateY(0); }
+    30%  { opacity: 0; transform: translateY(-16px); }
+    50%  { opacity: 0; transform: translateY(16px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .spin-btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    padding: 20px 56px;
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+    box-shadow: 0 6px 24px rgba(255,75,43,0.35);
+    letter-spacing: -0.5px;
+    margin-bottom: 20px;
+  }
+
+  .spin-btn:hover  { transform: scale(1.05); box-shadow: 0 10px 32px rgba(255,75,43,0.45); }
+  .spin-btn:active { transform: scale(0.97); }
+  .spin-btn.spinning { background: #999; box-shadow: none; pointer-events: none; }
+
+  .lucky-btn {
+    background: transparent;
+    color: var(--muted);
+    border: 1.5px solid #ddd;
+    border-radius: 100px;
+    padding: 10px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 40px;
+  }
+  .lucky-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .tip {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  footer {
+    margin-top: auto;
+    padding-top: 30px;
+    font-size: 12px;
+    color: #bbb;
+    text-align: center;
+  }
+
+  .placeholder-msg {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    color: #ccc;
+    font-weight: 700;
+  }
+
+  @media (max-width: 540px) {
+    .result-area { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">🇬🇧 UK Supermarket</p>
+  <h1>Meal Deal<br><span>Roulette</span></h1>
+  <p class="subtitle">Can't decide? Let fate choose your lunch.</p>
+  <div class="supermarket-pills">
+    <span class="pill tesco active" data-shop="tesco">Tesco</span>
+    <span class="pill ms active" data-shop="ms">M&S</span>
+    <span class="pill sains active" data-shop="sainsburys">Sainsbury's</span>
+    <span class="pill boots active" data-shop="boots">Boots</span>
+    <span class="pill pret active" data-shop="pret">Pret</span>
+  </div>
+</header>
+
+<div class="result-area" id="results">
+  <div class="card" id="card-main">
+    <div class="card-stripe main"></div>
+    <div>
+      <p class="card-label main">🥪 Main</p>
+      <span class="card-emoji" id="emoji-main">🎲</span>
+      <p class="card-item placeholder-msg" id="item-main">Hit spin!</p>
+    </div>
+    <p class="card-from" id="from-main"></p>
+  </div>
+  <div class="card" id="card-snack">
+    <div class="card-stripe snack"></div>
+    <div>
+      <p class="card-label snack">🍿 Snack</p>
+      <span class="card-emoji" id="emoji-snack">🎲</span>
+      <p class="card-item placeholder-msg" id="item-snack">Hit spin!</p>
+    </div>
+    <p class="card-from" id="from-snack"></p>
+  </div>
+  <div class="card" id="card-drink">
+    <div class="card-stripe drink"></div>
+    <div>
+      <p class="card-label drink">🥤 Drink</p>
+      <span class="card-emoji" id="emoji-drink">🎲</span>
+      <p class="card-item placeholder-msg" id="item-drink">Hit spin!</p>
+    </div>
+    <p class="card-from" id="from-drink"></p>
+  </div>
+</div>
+
+<button class="spin-btn" id="spinBtn" onclick="spin()">🎰 Spin!</button>
+<button class="lucky-btn" onclick="spinOnce('main')">🥪 Just pick my main</button>
+<p class="tip">Toggle supermarkets above to filter choices</p>
+
+<footer>Items are representative — availability may vary by store & season.</footer>
+
+<script>
+const DB = {
+  tesco: {
+    name: "Tesco",
+    mains: [
+      { item: "BLT Sandwich", emoji: "🥓" },
+      { item: "Chicken & Bacon Club", emoji: "🍗" },
+      { item: "Egg Mayo Sandwich", emoji: "🥚" },
+      { item: "Tuna Crunch Baguette", emoji: "🥖" },
+      { item: "Ploughman's Sandwich", emoji: "🧀" },
+      { item: "Chicken Caesar Wrap", emoji: "🌯" },
+      { item: "Mature Cheddar Ploughman's Wrap", emoji: "🌯" },
+      { item: "Prawn Marie Rose Sandwich", emoji: "🦐" },
+      { item: "No Naughties Pasta Salad", emoji: "🍝" },
+      { item: "Sushi Selection Box", emoji: "🍱" },
+    ],
+    snacks: [
+      { item: "Walkers Ready Salted Crisps", emoji: "🥔" },
+      { item: "Walkers Cheese & Onion", emoji: "🥔" },
+      { item: "McCoy's Ridge Crisps", emoji: "🥔" },
+      { item: "Nakd Cocoa Orange Bar", emoji: "🍫" },
+      { item: "Tesco Flapjack", emoji: "🍪" },
+      { item: "Graze Punnet", emoji: "🍇" },
+      { item: "Apple", emoji: "🍎" },
+      { item: "Banana", emoji: "🍌" },
+      { item: "Fruit Salad Pot", emoji: "🍓" },
+    ],
+    drinks: [
+      { item: "Coca-Cola 330ml", emoji: "🥤" },
+      { item: "Diet Coke 330ml", emoji: "🥤" },
+      { item: "Fanta Orange", emoji: "🍊" },
+      { item: "Still Water 500ml", emoji: "💧" },
+      { item: "Sparkling Water 500ml", emoji: "💧" },
+      { item: "Tropicana Orange Juice", emoji: "🍊" },
+      { item: "Innocent Smoothie", emoji: "🥤" },
+      { item: "Ribena Blackcurrant", emoji: "🫐" },
+    ],
+  },
+  ms: {
+    name: "M&S",
+    mains: [
+      { item: "Prawn Marie Rose Sandwich", emoji: "🦐" },
+      { item: "Smoked Salmon & Cream Cheese Bagel", emoji: "🥯" },
+      { item: "Chicken Caesar Wrap", emoji: "🌯" },
+      { item: "Crayfish & Rocket Sandwich", emoji: "🦞" },
+      { item: "Classic Club Sandwich", emoji: "🥪" },
+      { item: "Avocado & Bacon Toastie", emoji: "🥑" },
+      { item: "No Noodle Prawn Pad Thai Pot", emoji: "🍜" },
+      { item: "Sushi Chef Selection", emoji: "🍣" },
+      { item: "Houmous & Falafel Wrap", emoji: "🌯" },
+      { item: "Smoked Duck Hoisin Wrap", emoji: "🦆" },
+    ],
+    snacks: [
+      { item: "Percy Pigs Share Bag", emoji: "🐷" },
+      { item: "Sea Salt Hand Cooked Crisps", emoji: "🥔" },
+      { item: "Extremely Chocolatey Cookie", emoji: "🍪" },
+      { item: "Belgian Chocolate Brownie", emoji: "🍫" },
+      { item: "Fruit & Nut Mix", emoji: "🥜" },
+      { item: "Mango Chilli Fruit Pieces", emoji: "🥭" },
+      { item: "Yogurt Pot", emoji: "🍦" },
+      { item: "Melon Chunks", emoji: "🍈" },
+    ],
+    drinks: [
+      { item: "M&S Sparkling Elderflower", emoji: "🌸" },
+      { item: "Pressed Apple Juice", emoji: "🍏" },
+      { item: "Kombucha Mixed Berry", emoji: "🫐" },
+      { item: "Flat White (chilled)", emoji: "☕" },
+      { item: "Oat Milk Latte (chilled)", emoji: "🥛" },
+      { item: "Still Water", emoji: "💧" },
+      { item: "Diet Coke", emoji: "🥤" },
+      { item: "Organic Cloudy Lemonade", emoji: "🍋" },
+    ],
+  },
+  sainsburys: {
+    name: "Sainsbury's",
+    mains: [
+      { item: "Taste the Difference Prawn Cocktail", emoji: "🦐" },
+      { item: "Ham & Mustard Sandwich", emoji: "🥩" },
+      { item: "Mature Cheddar & Pickle Roll", emoji: "🧀" },
+      { item: "Chicken Salad Wrap", emoji: "🌯" },
+      { item: "Egg & Watercress Sandwich", emoji: "🥚" },
+      { item: "Coronation Chicken Sandwich", emoji: "🍗" },
+      { item: "Sweet Chilli Chicken Noodle Pot", emoji: "🍜" },
+      { item: "Macaroni Cheese Pot", emoji: "🧀" },
+      { item: "All Day Breakfast Wrap", emoji: "🌯" },
+    ],
+    snacks: [
+      { item: "Tyrells Crisps", emoji: "🥔" },
+      { item: "Kettle Chips Sea Salt", emoji: "🥔" },
+      { item: "Maryland Cookies", emoji: "🍪" },
+      { item: "Sainsbury's Flapjack", emoji: "🍫" },
+      { item: "Orange", emoji: "🍊" },
+      { item: "Grapes Pot", emoji: "🍇" },
+      { item: "KitKat 2-Finger", emoji: "🍫" },
+      { item: "Pringles Mini Tube", emoji: "🥔" },
+    ],
+    drinks: [
+      { item: "Pepsi Max 330ml", emoji: "🥤" },
+      { item: "7Up Free", emoji: "🟢" },
+      { item: "Sainsbury's Cloudy Lemonade", emoji: "🍋" },
+      { item: "J2O Orange & Passion Fruit", emoji: "🍊" },
+      { item: "Lucozade Energy Orange", emoji: "⚡" },
+      { item: "Still Water", emoji: "💧" },
+      { item: "Pure Orange Juice Carton", emoji: "🍊" },
+      { item: "Volvic Touch of Fruit", emoji: "🍓" },
+    ],
+  },
+  boots: {
+    name: "Boots",
+    mains: [
+      { item: "Chicken & Stuffing Sandwich", emoji: "🍗" },
+      { item: "Tuna Melt Panini", emoji: "🫓" },
+      { item: "Salmon & Cucumber Sandwich", emoji: "🐟" },
+      { item: "Cheese & Tomato Wrap", emoji: "🌯" },
+      { item: "BLT Wrap", emoji: "🥓" },
+      { item: "Egg Mayo Baguette", emoji: "🥖" },
+      { item: "Chicken Tikka Wrap", emoji: "🌯" },
+    ],
+    snacks: [
+      { item: "Snack-a-Jacks Salt & Vinegar", emoji: "🥔" },
+      { item: "Brannigans Ham & Mustard", emoji: "🥔" },
+      { item: "Nairns Oat Biscuits", emoji: "🍪" },
+      { item: "Mini Cheddars", emoji: "🧀" },
+      { item: "Apple", emoji: "🍎" },
+      { item: "Haribo Starmix Bag", emoji: "🍬" },
+      { item: "Nature Valley Bar", emoji: "🌾" },
+    ],
+    drinks: [
+      { item: "Coke Zero 330ml", emoji: "🥤" },
+      { item: "Sprite Zero", emoji: "🟢" },
+      { item: "Vitamin Water Raspberry", emoji: "🍓" },
+      { item: "Still Water 500ml", emoji: "💧" },
+      { item: "Purdey's Multivitamin", emoji: "⚡" },
+      { item: "Oasis Summer Fruits", emoji: "🌸" },
+      { item: "Volvic Still Water", emoji: "💧" },
+    ],
+  },
+  pret: {
+    name: "Pret A Manger",
+    mains: [
+      { item: "Baguette au Poulet", emoji: "🥖" },
+      { item: "Tuna Nicoise Baguette", emoji: "🐟" },
+      { item: "Egg & Spinach Sandwich", emoji: "🥚" },
+      { item: "Avocado & Herb Wrap", emoji: "🥑" },
+      { item: "Hoisin Duck Wrap", emoji: "🦆" },
+      { item: "Italian Prosciutto Baguette", emoji: "🥖" },
+      { item: "Super Veg Rainbow Flatbread", emoji: "🌈" },
+      { item: "Mac & Cheese Pot", emoji: "🧀" },
+    ],
+    snacks: [
+      { item: "Dark Chocolate Granola Bar", emoji: "🍫" },
+      { item: "Pret Brownie", emoji: "🍫" },
+      { item: "Pret Crisps Sea Salt", emoji: "🥔" },
+      { item: "Almond Croissant (mini)", emoji: "🥐" },
+      { item: "Pret Cookie", emoji: "🍪" },
+      { item: "Fruit Salad Cup", emoji: "🍓" },
+      { item: "Mixed Nuts & Raisins", emoji: "🥜" },
+    ],
+    drinks: [
+      { item: "Pret Iced Matcha Latte", emoji: "🍵" },
+      { item: "Fresh Coffee", emoji: "☕" },
+      { item: "Flat White", emoji: "☕" },
+      { item: "Still Lemon Water", emoji: "🍋" },
+      { item: "Pret Berry Smoothie", emoji: "🫐" },
+      { item: "Sparkling Water", emoji: "💧" },
+      { item: "Tropicana OJ", emoji: "🍊" },
+    ],
+  },
+};
+
+let activePills = new Set(["tesco","ms","sainsburys","boots","pret"]);
+
+document.querySelectorAll('.pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    const shop = pill.dataset.shop;
+    if (activePills.has(shop)) {
+      if (activePills.size === 1) return; // at least one active
+      activePills.delete(shop);
+      pill.classList.remove('active');
+    } else {
+      activePills.add(shop);
+      pill.classList.add('active');
+    }
+  });
+});
+
+function pickFrom(category) {
+  const active = [...activePills];
+  const all = active.flatMap(s => DB[s][category].map(i => ({ ...i, from: DB[s].name })));
+  return all[Math.floor(Math.random() * all.length)];
+}
+
+function animateCard(id, emojiId, fromId, picked) {
+  const card = document.getElementById(id);
+  const itemEl = document.getElementById(id.replace('card-','item-'));
+  const emojiEl = document.getElementById(emojiId);
+  const fromEl = document.getElementById(fromId);
+
+  card.classList.add('rolling');
+  setTimeout(() => {
+    itemEl.textContent = picked.item;
+    itemEl.classList.remove('placeholder-msg');
+    emojiEl.textContent = picked.emoji;
+    fromEl.textContent = "From " + picked.from;
+    card.classList.remove('rolling');
+  }, 250);
+}
+
+function spin() {
+  const btn = document.getElementById('spinBtn');
+  btn.classList.add('spinning');
+  btn.textContent = '🎲 Picking...';
+
+  const main  = pickFrom('mains');
+  const snack = pickFrom('snacks');
+  const drink = pickFrom('drinks');
+
+  animateCard('card-main',  'emoji-main',  'from-main',  main);
+  animateCard('card-snack', 'emoji-snack', 'from-snack', snack);
+  animateCard('card-drink', 'emoji-drink', 'from-drink', drink);
+
+  setTimeout(() => {
+    btn.classList.remove('spinning');
+    btn.textContent = '🔄 Spin Again!';
+  }, 500);
+}
+
+function spinOnce(cat) {
+  const map = { main: ['mains','card-main','emoji-main','from-main'], snack: ['snacks','card-snack','emoji-snack','from-snack'], drink: ['drinks','card-drink','emoji-drink','from-drink'] };
+  const [category, cardId, emojiId, fromId] = map[cat];
+  const picked = pickFrom(category);
+  animateCard(cardId, emojiId, fromId, picked);
+}
+</script>
+</body>
+</html>
