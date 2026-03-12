@@ -17,18 +17,12 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--B);background:var(--white);color:var(--black);overflow-x:hidden;
   cursor:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10' fill='%23F5E432' stroke='%230A0A0A' stroke-width='2'/></svg>") 12 12, auto}
-
-/* ═══ DOT GRID TEXTURE ═══ */
 .dot-bg{background-image:radial-gradient(circle,rgba(10,10,10,.12) 1px,transparent 1px);background-size:20px 20px}
 .stripe-bg{background-image:repeating-linear-gradient(-45deg,transparent,transparent 10px,rgba(10,10,10,.04) 10px,rgba(10,10,10,.04) 11px)}
-
-/* ═══ NAV ═══ */
 nav{background:var(--black);height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:600;border-bottom:4px solid var(--yellow)}
 .nav-logo{font-family:var(--F);font-size:18px;color:var(--yellow);letter-spacing:1px;display:flex;align-items:center;gap:10px}
 .nav-pip{background:var(--red);color:var(--white);font-size:9px;padding:3px 9px;border-radius:2px;letter-spacing:2px;transform:rotate(-1.5deg);display:inline-block;font-family:var(--M)}
 .streak{background:transparent;border:2px solid rgba(255,255,255,.18);border-radius:4px;padding:5px 14px;font-size:11px;font-weight:700;color:rgba(255,255,255,.5);font-family:var(--M);letter-spacing:1px}
-
-/* ═══ STEP INDICATOR (bold top bar) ═══ */
 .step-bar{background:var(--yellow);border-bottom:4px solid var(--black);padding:0;display:grid;grid-template-columns:1fr 1fr 1fr;height:52px}
 .sb-item{display:flex;align-items:center;justify-content:center;gap:10px;border-right:3px solid var(--black);cursor:pointer;transition:background .15s;position:relative;overflow:hidden}
 .sb-item:last-child{border-right:none}
@@ -41,23 +35,11 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
 .sb-item.active .sb-lbl,.sb-item.done .sb-lbl{color:rgba(245,228,50,.6)}
 .sb-check{position:relative;z-index:1;font-size:16px;opacity:0;transition:opacity .3s}
 .sb-item.done .sb-check{opacity:1}
-
-/* ═══ PANELS ═══ */
 .panel{display:none}
 .panel.active{display:block;animation:panelReveal .4s cubic-bezier(.22,1,.36,1) both}
 @keyframes panelReveal{from{opacity:0;clip-path:inset(0 0 100% 0)}to{opacity:1;clip-path:inset(0 0 0% 0)}}
-
-/* ══════════════════════════════════════
-   STEP 1 — DIETARY
-   Aesthetic: BIG cards, comic stamp, halftone dots
-══════════════════════════════════════ */
 #panel-1{background:var(--white)}
-.s1-hero{
-  background:var(--yellow);
-  padding:48px 32px 40px;
-  border-bottom:4px solid var(--black);
-  position:relative;overflow:hidden;
-}
+.s1-hero{background:var(--yellow);padding:48px 32px 40px;border-bottom:4px solid var(--black);position:relative;overflow:hidden;}
 .s1-hero .dot-bg{position:absolute;inset:0;pointer-events:none;opacity:.35}
 .hero-number{position:absolute;right:-20px;top:-20px;font-family:var(--F);font-size:200px;font-weight:900;color:rgba(10,10,10,.06);line-height:1;pointer-events:none;user-select:none}
 .hero-eyebrow{font-family:var(--M);font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(10,10,10,.5);margin-bottom:14px;position:relative;z-index:1}
@@ -65,76 +47,38 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
 .hero-h span{display:block}
 .hero-h em{color:var(--red);font-style:normal;font-size:.9em}
 .hero-sub{font-size:14px;color:rgba(10,10,10,.6);font-weight:500;line-height:1.6;max-width:500px;position:relative;z-index:1}
-
 .s1-body{padding:32px 28px 130px;max-width:1000px;margin:0 auto}
 .s1-hint{font-family:var(--M);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(10,10,10,.35);margin-bottom:20px;display:flex;align-items:center;gap:12px}
 .s1-hint::after{content:'';flex:1;height:2px;background:rgba(10,10,10,.1)}
-
-/* THE DIET GRID — irregular, exciting */
 .diet-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
 @media(max-width:700px){.diet-grid{grid-template-columns:repeat(2,1fr)}}
-
-.dc{
-  background:var(--white);
-  border:var(--ink-border);
-  border-radius:16px;
-  padding:24px 16px 20px;
-  cursor:pointer;
-  position:relative;overflow:hidden;
-  transition:transform .15s cubic-bezier(.34,1.56,.64,1),box-shadow .15s;
-  box-shadow:var(--fat-shadow);
-  text-align:center;
-  user-select:none;
-}
+.dc{background:var(--white);border:var(--ink-border);border-radius:16px;padding:24px 16px 20px;cursor:pointer;position:relative;overflow:hidden;transition:transform .15s cubic-bezier(.34,1.56,.64,1),box-shadow .15s;box-shadow:var(--fat-shadow);text-align:center;user-select:none;}
 .dc:hover{transform:translate(-2px,-4px);box-shadow:7px 9px 0 var(--black)}
 .dc:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--black)}
 .dc.on{background:var(--black);box-shadow:5px 5px 0 var(--yellow);border-color:var(--yellow);transform:translate(-1px,-1px)}
 .dc.on:hover{transform:translate(-3px,-5px);box-shadow:8px 10px 0 var(--yellow)}
-/* STAMP overlay */
-.dc-stamp{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-family:var(--F);font-size:28px;font-weight:900;letter-spacing:3px;
-  color:var(--red);border:4px solid var(--red);border-radius:10px;
-  transform:rotate(-15deg) scale(0);opacity:0;
-  transition:all .2s cubic-bezier(.34,1.56,.64,1);
-  background:rgba(255,255,255,.92);
-  pointer-events:none;z-index:2;
-  text-shadow:none;padding:4px 12px;margin:16px;
-  border-radius:8px;
-}
+.dc-stamp{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--F);font-size:28px;font-weight:900;letter-spacing:3px;color:var(--red);border:4px solid var(--red);border-radius:10px;transform:rotate(-15deg) scale(0);opacity:0;transition:all .2s cubic-bezier(.34,1.56,.64,1);background:rgba(255,255,255,.92);pointer-events:none;z-index:2;text-shadow:none;padding:4px 12px;margin:16px;border-radius:8px;}
 .dc.on .dc-stamp{transform:rotate(-8deg) scale(1);opacity:1}
 .dc-icon{font-size:44px;display:block;margin-bottom:10px;transition:transform .3s}
 .dc:hover .dc-icon{transform:scale(1.18) rotate(-5deg)}
 .dc.on .dc-icon{filter:grayscale(1) brightness(4)}
 .dc-name{font-size:12px;font-weight:800;line-height:1.3;letter-spacing:.3px;transition:color .15s}
 .dc.on .dc-name{color:var(--yellow)}
-/* size variation for visual interest */
 .dc:nth-child(3n+1){border-radius:20px 12px 20px 12px}
 .dc:nth-child(3n+2){border-radius:12px 20px 12px 20px}
 .dc:nth-child(3n){border-radius:16px}
-
 .skip-zone{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .skip-btn{background:transparent;border:2.5px dashed rgba(10,10,10,.25);border-radius:10px;padding:14px 24px;font-size:13px;font-weight:700;cursor:pointer;color:rgba(10,10,10,.45);font-family:var(--B);transition:all .18s;display:flex;align-items:center;gap:8px}
 .skip-btn:hover{border-color:var(--black);color:var(--black);background:rgba(245,228,50,.3)}
 .skip-txt{font-size:12px;color:rgba(10,10,10,.35);font-weight:500}
-
-/* ══════════════════════════════════════
-   STEP 2 — MAP & STORE
-   Aesthetic: Mission briefing / dark dossier
-══════════════════════════════════════ */
 #panel-2{background:var(--black)}
-.s2-hero{
-  padding:44px 32px 32px;position:relative;overflow:hidden;
-  border-bottom:4px solid rgba(255,255,255,.08);
-}
+.s2-hero{padding:44px 32px 32px;position:relative;overflow:hidden;border-bottom:4px solid rgba(255,255,255,.08);}
 .s2-hero .stripe-bg{position:absolute;inset:0;pointer-events:none}
 .s2-hero-num{position:absolute;right:-10px;top:-10px;font-family:var(--F);font-size:200px;font-weight:900;color:rgba(255,255,255,.03);line-height:1;pointer-events:none}
 .s2-eye{font-family:var(--M);font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(245,228,50,.45);margin-bottom:14px;position:relative;z-index:1}
 .s2-title{font-family:var(--F);font-size:clamp(38px,7vw,80px);line-height:.9;font-weight:900;letter-spacing:-1px;color:#fff;position:relative;z-index:1;margin-bottom:12px}
 .s2-title em{color:var(--yellow);font-style:normal;display:block}
 .s2-sub{font-size:14px;color:rgba(255,255,255,.38);font-weight:500;line-height:1.6;max-width:480px;position:relative;z-index:1}
-
-/* MODE: chunky physical toggle */
 .mode-toggle{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:var(--ink-border);border-color:rgba(255,255,255,.15);border-radius:14px;overflow:hidden;margin:0 28px 20px;box-shadow:4px 4px 0 rgba(255,255,255,.06)}
 .mt-btn{padding:14px 10px;background:transparent;border:none;border-right:2px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);font-size:11px;font-weight:700;cursor:pointer;font-family:var(--B);transition:all .18s;display:flex;flex-direction:column;align-items:center;gap:5px;position:relative;overflow:hidden;letter-spacing:.3px}
 .mt-btn:last-child{border-right:none}
@@ -146,32 +90,17 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
 .mt-btn.active[data-mode="fastfood"]{background:var(--red);color:#fff}
 .mt-btn.active[data-mode="highstreet"]{background:var(--orange)}
 .mt-btn.active[data-mode="all"]{background:var(--yellow)}
-
-/* STORE TOKENS — coin-like */
 .store-token-row{display:flex;flex-wrap:wrap;gap:8px;padding:0 28px;margin-bottom:20px}
-.st{
-  display:flex;align-items:center;gap:7px;
-  padding:9px 16px;border-radius:100px;
-  border:2px solid rgba(255,255,255,.15);
-  background:rgba(255,255,255,.05);
-  cursor:pointer;font-size:12px;font-weight:700;
-  transition:all .16s cubic-bezier(.34,1.56,.64,1);
-  user-select:none;color:rgba(255,255,255,.5);
-  font-family:var(--B)
-}
+.st{display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:100px;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);cursor:pointer;font-size:12px;font-weight:700;transition:all .16s cubic-bezier(.34,1.56,.64,1);user-select:none;color:rgba(255,255,255,.5);font-family:var(--B)}
 .st:hover{transform:scale(1.08);border-color:rgba(255,255,255,.3);color:#fff}
 .st.on{border-color:var(--yellow);background:rgba(245,228,50,.12);color:var(--yellow);transform:scale(1.04)}
 .st.off{opacity:.2;filter:grayscale(1);transform:scale(.96)}
 .st .sdot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-
-/* PINNED STORE BANNER */
 .pinned-bar{display:none;align-items:center;gap:12px;padding:14px 28px;background:var(--yellow);border-top:3px solid var(--black);border-bottom:3px solid var(--black)}
 .pinned-bar.show{display:flex}
 .pb-name{font-family:var(--F);font-size:20px;font-weight:900;color:var(--black);letter-spacing:.5px}
 .pb-type{font-family:var(--M);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(10,10,10,.45);margin-left:auto}
 .pb-clear{background:var(--black);color:var(--yellow);border:none;border-radius:6px;padding:7px 14px;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--B)}
-
-/* MAP */
 .locate-btn{display:inline-flex;align-items:center;gap:8px;background:transparent;color:rgba(255,255,255,.55);border:2px solid rgba(255,255,255,.18);border-radius:8px;padding:11px 22px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--B);transition:all .18s;margin:0 28px 16px}
 .locate-btn:hover{border-color:var(--yellow);color:var(--yellow)}
 .locate-btn:disabled{opacity:.35;cursor:not-allowed}
@@ -190,17 +119,9 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
 .msb-info p{font-size:10px;color:rgba(255,255,255,.3);margin-top:1px}
 .msb-dist{font-size:10px;color:var(--yellow);font-weight:700;margin-left:auto;white-space:nowrap;font-family:var(--M)}
 .msb-empty{padding:24px 12px;text-align:center;font-size:12px;color:rgba(255,255,255,.25);line-height:2}
-
-/* ══════════════════════════════════════
-   STEP 3 — THE MACHINE
-   Aesthetic: Physical arcade cabinet with chrome + neon
-══════════════════════════════════════ */
 #panel-3{background:#080503}
-
-/* CABINET TOP */
 .cabinet-top{background:linear-gradient(180deg,#1A0C06 0%,#100804 100%);border-bottom:4px solid #2A1A0E;padding:28px 24px 20px;position:relative;overflow:hidden}
 .cabinet-top::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(255,180,0,.015) 60px,rgba(255,180,0,.015) 61px),repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(255,180,0,.015) 60px,rgba(255,180,0,.015) 61px)}
-/* NEON BULB STRINGS */
 .bulb-string{display:flex;justify-content:space-between;margin-bottom:20px;padding:0 4px}
 .bulb{width:12px;height:12px;border-radius:50%;animation:bulbPulse 2s ease-in-out infinite}
 .b-y{background:#FFE500;box-shadow:0 0 6px #FFE500,0 0 14px #FFE500}
@@ -209,127 +130,57 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
 .b-g{background:#00FF88;box-shadow:0 0 6px #00FF88,0 0 14px #00FF88}
 .b-p{background:#CC44FF;box-shadow:0 0 6px #CC44FF,0 0 14px #CC44FF}
 @keyframes bulbPulse{0%,100%{opacity:.3;transform:scale(.85)}50%{opacity:1;transform:scale(1)}}
-.bulb:nth-child(1){animation-delay:0s}
-.bulb:nth-child(2){animation-delay:.2s}
-.bulb:nth-child(3){animation-delay:.4s}
-.bulb:nth-child(4){animation-delay:.6s}
-.bulb:nth-child(5){animation-delay:.8s}
-.bulb:nth-child(6){animation-delay:1s}
-.bulb:nth-child(7){animation-delay:1.2s}
-.bulb:nth-child(8){animation-delay:1.4s}
-.bulb:nth-child(9){animation-delay:1.6s}
-.bulb:nth-child(10){animation-delay:1.8s}
-
+.bulb:nth-child(1){animation-delay:0s}.bulb:nth-child(2){animation-delay:.2s}.bulb:nth-child(3){animation-delay:.4s}.bulb:nth-child(4){animation-delay:.6s}.bulb:nth-child(5){animation-delay:.8s}.bulb:nth-child(6){animation-delay:1s}.bulb:nth-child(7){animation-delay:1.2s}.bulb:nth-child(8){animation-delay:1.4s}.bulb:nth-child(9){animation-delay:1.6s}.bulb:nth-child(10){animation-delay:1.8s}
 .cabinet-title-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:0}
 .cabinet-title{font-family:var(--F);font-size:clamp(36px,6vw,64px);color:#fff;line-height:.9;letter-spacing:0px;font-weight:900}
 .cabinet-title em{color:var(--yellow);font-style:normal}
 .store-badge{background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.12);border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;color:rgba(255,255,255,.45);font-family:var(--M);letter-spacing:.5px;display:flex;align-items:center;gap:7px;transition:all .3s;align-self:flex-start;margin-top:8px}
 .store-badge.lit{border-color:var(--yellow);color:var(--yellow);background:rgba(245,228,50,.07)}
-
-/* MACHINE BODY — the actual cabinet face */
 .machine-body{background:linear-gradient(160deg,#15080300 0%,#0A040200 100%);padding:20px 20px;max-width:960px;margin:0 auto}
-
-/* CHROME FRAME around reels */
-.reel-chassis{
-  background:linear-gradient(180deg,#1E1208 0%,#120B04 100%);
-  border:3px solid #3A2010;
-  border-radius:20px;
-  padding:18px 14px 16px;
-  position:relative;overflow:hidden;
-  box-shadow:0 0 0 1px #2A1608,inset 0 1px 0 rgba(255,255,255,.06),0 20px 60px rgba(0,0,0,.8);
-  margin-bottom:18px;
-}
-/* Chrome edge highlight */
+.reel-chassis{background:linear-gradient(180deg,#1E1208 0%,#120B04 100%);border:3px solid #3A2010;border-radius:20px;padding:18px 14px 16px;position:relative;overflow:hidden;box-shadow:0 0 0 1px #2A1608,inset 0 1px 0 rgba(255,255,255,.06),0 20px 60px rgba(0,0,0,.8);margin-bottom:18px;}
 .reel-chassis::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 5%,rgba(255,200,80,.3) 30%,rgba(255,255,200,.5) 50%,rgba(255,200,80,.3) 70%,transparent 95%);pointer-events:none}
 .chassis-label{text-align:center;font-family:var(--M);font-size:9px;letter-spacing:6px;text-transform:uppercase;color:rgba(255,180,40,.25);margin-bottom:16px}
-
-/* REELS ROW */
 .reels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
 .reel-col{display:flex;flex-direction:column;align-items:center;gap:8px}
 .reel-label{font-family:var(--M);font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:4px 12px;border-radius:4px;border:1px solid}
 .rl-main{color:#FF9966;border-color:rgba(255,153,102,.4)}
 .rl-mid{color:var(--yellow);border-color:rgba(245,228,50,.4)}
 .rl-drink{color:#66DDFF;border-color:rgba(102,221,255,.4)}
-
-/* REEL WINDOW — 3D drum feel */
-.reel-win{
- width:100%;aspect-ratio:1/1;
-  border-radius:14px;overflow:hidden;position:relative;
-  background:#040200;
-  border:2px solid rgba(255,255,255,.08);
-}
-/* Curved 3D vignette on reels */
+.reel-win{width:100%;aspect-ratio:1/1;border-radius:14px;overflow:hidden;position:relative;background:#040200;border:2px solid rgba(255,255,255,.08);}
 .reel-win::before{content:'';position:absolute;top:0;left:0;right:0;height:32%;z-index:3;pointer-events:none;background:linear-gradient(to bottom,rgba(4,2,0,.95) 0%,transparent 100%)}
 .reel-win::after{content:'';position:absolute;bottom:0;left:0;right:0;height:32%;z-index:3;pointer-events:none;background:linear-gradient(to top,rgba(4,2,0,.95) 0%,transparent 100%)}
-/* Side edge shadows for drum effect */
 .reel-sides{position:absolute;inset:0;z-index:4;pointer-events:none;background:linear-gradient(to right,rgba(4,2,0,.6) 0%,transparent 20%,transparent 80%,rgba(4,2,0,.6) 100%)}
-/* Center line highlight */
 .reel-line{position:absolute;top:50%;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,228,50,.3),transparent);z-index:5;transform:translateY(-50%);pointer-events:none}
 .reel-line::before{content:'';position:absolute;top:-12px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent)}
 .reel-line::after{content:'';position:absolute;top:12px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent)}
-
 .reel-inner{position:relative;width:100%;height:100%}
 .ri-img{width:100%;height:76%;object-fit:cover;display:block}
 .ri-name{position:absolute;bottom:0;left:0;right:0;padding:4px 8px 8px;text-align:center;font-size:10px;font-weight:700;color:rgba(255,255,255,.9);line-height:1.3;font-family:var(--B);background:linear-gradient(to top,rgba(4,2,0,1) 60%,transparent)}
 .reel-ph{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:48px;opacity:.06}
-
-/* SPIN OVERLAY */
 .spin-ov{position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;background:rgba(4,2,0,.65);backdrop-filter:blur(3px);opacity:0;transition:opacity .15s;pointer-events:none}
 .spin-ov.on{opacity:1}
 .sov-icon{font-size:38px;animation:spinAnim .45s ease infinite alternate}
 @keyframes spinAnim{from{transform:scale(.6) rotate(-20deg)}to{transform:scale(1.25) rotate(20deg)}}
-
-/* REEL GLOW when spinning */
 .reel-win.spinning-main{box-shadow:0 0 0 2px rgba(255,153,102,.4),0 0 20px rgba(255,153,102,.2)}
 .reel-win.spinning-mid{box-shadow:0 0 0 2px rgba(245,228,50,.4),0 0 20px rgba(245,228,50,.2)}
 .reel-win.spinning-drink{box-shadow:0 0 0 2px rgba(102,221,255,.4),0 0 20px rgba(102,221,255,.2)}
-
-/* REEL CONTROLS */
 .reel-ctrls{display:flex;gap:6px}
 .lb{padding:5px 13px;border-radius:6px;border:1.5px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);color:rgba(255,255,255,.4);font-size:10px;font-weight:700;cursor:pointer;transition:all .18s;font-family:var(--M);letter-spacing:.5px}
 .lb:hover{background:rgba(255,255,255,.1);color:#fff}
 .lb.locked{background:rgba(245,228,50,.1);border-color:var(--yellow);color:var(--yellow)}
 .rb{padding:5px 10px;border-radius:6px;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:rgba(255,255,255,.28);font-size:14px;cursor:pointer;transition:all .18s}
 .rb:hover{background:rgba(255,255,255,.1);color:#fff}
-
-/* THE BIG SPIN BUTTON */
 .spin-zone{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;padding:4px 0}
-.spin-giant{
-  background:var(--red);color:#fff;
-  border:none;border-radius:14px;
-  padding:20px 56px;
-  font-family:var(--F);font-size:30px;letter-spacing:2px;font-weight:900;
-  cursor:pointer;position:relative;
-  box-shadow:0 8px 0 #8B0000,0 12px 32px rgba(255,32,64,.4);
-  transition:transform .1s,box-shadow .1s;
-  display:flex;align-items:center;gap:12px;
-}
+.spin-giant{background:var(--red);color:#fff;border:none;border-radius:14px;padding:20px 56px;font-family:var(--F);font-size:30px;letter-spacing:2px;font-weight:900;cursor:pointer;position:relative;box-shadow:0 8px 0 #8B0000,0 12px 32px rgba(255,32,64,.4);transition:transform .1s,box-shadow .1s;display:flex;align-items:center;gap:12px;}
 .spin-giant:hover{transform:translateY(-4px);box-shadow:0 12px 0 #8B0000,0 18px 44px rgba(255,32,64,.5)}
 .spin-giant:active{transform:translateY(6px);box-shadow:0 2px 0 #8B0000,0 4px 12px rgba(255,32,64,.3)}
 .spin-giant:disabled{background:#222;box-shadow:0 4px 0 #111;cursor:not-allowed;transform:none;color:#555}
-/* LED ring on spin btn */
 .spin-giant::after{content:'';position:absolute;inset:3px;border-radius:11px;border:1px solid rgba(255,255,255,.15);pointer-events:none}
-
-.chaos-btn{
-  background:transparent;border:3px solid rgba(245,228,50,.45);color:rgba(245,228,50,.6);
-  border-radius:14px;padding:17px 24px;
-  font-family:var(--F);font-size:18px;cursor:pointer;letter-spacing:1.5px;
-  transition:all .18s;display:flex;align-items:center;gap:8px;
-}
+.chaos-btn{background:transparent;border:3px solid rgba(245,228,50,.45);color:rgba(245,228,50,.6);border-radius:14px;padding:17px 24px;font-family:var(--F);font-size:18px;cursor:pointer;letter-spacing:1.5px;transition:all .18s;display:flex;align-items:center;gap:8px;}
 .chaos-btn:hover{background:var(--yellow);color:var(--black);border-color:var(--yellow);transform:rotate(-2deg) scale(1.04)}
 .chaos-btn:disabled{opacity:.25;cursor:not-allowed}
-
-.quip-strip{
-  text-align:center;font-size:14px;font-weight:600;
-  color:rgba(255,255,255,.2);font-style:italic;min-height:22px;
-  margin-top:14px;transition:color .4s;font-family:var(--B);
-  padding:10px;border-top:1px solid rgba(255,255,255,.04);
-}
+.quip-strip{text-align:center;font-size:14px;font-weight:600;color:rgba(255,255,255,.2);font-style:italic;min-height:22px;margin-top:14px;transition:color .4s;font-family:var(--B);padding:10px;border-top:1px solid rgba(255,255,255,.04);}
 .quip-strip.lit{color:rgba(255,255,255,.65)}
-
-/* ══════════════════════════════════════
-   RESULTS — pop art reveal
-══════════════════════════════════════ */
 .result-zone{background:var(--white);padding:36px 20px 60px;border-top:5px solid var(--yellow)}
 .rz{max-width:960px;margin:0 auto}
 .rz-top{margin-bottom:24px;position:relative}
@@ -337,28 +188,13 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
 .rz-h{font-family:var(--F);font-size:clamp(40px,6vw,72px);line-height:.9;font-weight:900;letter-spacing:-1px}
 .rz-h em{color:var(--red);font-style:normal}
 .rz-sub{font-size:13px;color:rgba(10,10,10,.45);margin-top:8px;font-weight:500}
-
-/* RESULT CARDS — brutalist stickers */
 .result-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
 @media(max-width:640px){.result-cards{grid-template-columns:1fr}}
-
-.rc{
-  background:var(--white);
-  border:var(--ink-border);
-  border-radius:16px;overflow:hidden;
-  box-shadow:var(--fat-shadow);
-  animation:rcBang .4s cubic-bezier(.34,1.56,.64,1) both;
-  transition:transform .2s,box-shadow .2s;
-}
+.rc{background:var(--white);border:var(--ink-border);border-radius:16px;overflow:hidden;box-shadow:var(--fat-shadow);animation:rcBang .4s cubic-bezier(.34,1.56,.64,1) both;transition:transform .2s,box-shadow .2s;}
 .rc:hover{transform:translate(-2px,-3px);box-shadow:7px 8px 0 var(--black)}
 .rc:nth-child(2){animation-delay:.1s;transform-origin:center bottom}
 .rc:nth-child(3){animation-delay:.2s}
-@keyframes rcBang{
-  0%{opacity:0;transform:scale(.8) rotate(-3deg) translateY(16px)}
-  60%{transform:scale(1.04) rotate(.5deg)}
-  100%{opacity:1;transform:none}
-}
-
+@keyframes rcBang{0%{opacity:0;transform:scale(.8) rotate(-3deg) translateY(16px)}60%{transform:scale(1.04) rotate(.5deg)}100%{opacity:1;transform:none}}
 .rc-img-wrap{height:160px;overflow:hidden;position:relative;background:#F0EBE0}
 .rc-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
 .rc:hover .rc-img{transform:scale(1.08)}
@@ -377,17 +213,7 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
 .rc-lock.locked{background:var(--yellow);border-color:var(--black)}
 .rc-rs{padding:7px 10px;border-radius:6px;border:2.5px solid var(--black);background:var(--white);font-size:13px;cursor:pointer;font-family:var(--B);transition:all .18s;box-shadow:2px 2px 0 var(--black)}
 .rc-rs:hover{background:var(--black);color:#fff;transform:translate(-1px,-1px)}
-
-/* PERSONALITY CARD */
-.pers-card{
-  display:grid;grid-template-columns:1fr auto;
-  background:var(--black);
-  border:var(--ink-border);
-  border-radius:16px;overflow:hidden;
-  box-shadow:var(--fat-shadow);
-  margin-bottom:24px;
-  animation:rcBang .5s cubic-bezier(.34,1.56,.64,1) .3s both;
-}
+.pers-card{display:grid;grid-template-columns:1fr auto;background:var(--black);border:var(--ink-border);border-radius:16px;overflow:hidden;box-shadow:var(--fat-shadow);margin-bottom:24px;animation:rcBang .5s cubic-bezier(.34,1.56,.64,1) .3s both;}
 .pc-left{padding:30px 28px}
 .pc-kicker{font-family:var(--M);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:8px}
 .pc-title{font-family:var(--F);font-size:36px;color:var(--yellow);letter-spacing:.5px;line-height:1;margin-bottom:10px}
@@ -396,16 +222,12 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
 .share-btn:hover{background:#fff;transform:translate(-1px,-1px)}
 .pc-emoji{background:var(--red);display:flex;align-items:center;justify-content:center;font-size:70px;padding:0 36px;min-width:130px;position:relative;overflow:hidden}
 .pc-emoji::before{content:'';position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,.1),transparent 70%)}
-
-/* ACTION ROW */
 .action-row{display:flex;gap:10px;flex-wrap:wrap}
 .ar-spin{background:var(--black);color:#fff;border:3px solid var(--black);border-radius:10px;padding:14px 32px;font-family:var(--F);font-size:20px;letter-spacing:1.5px;cursor:pointer;transition:all .18s;box-shadow:4px 4px 0 rgba(0,0,0,.2);font-weight:900}
 .ar-spin:hover{background:var(--red);border-color:var(--red)}
 .ar-back{background:transparent;border:2.5px solid rgba(10,10,10,.2);border-radius:10px;padding:14px 24px;font-family:var(--F);font-size:18px;letter-spacing:1px;cursor:pointer;transition:all .18s;color:rgba(10,10,10,.4)}
 .ar-back:hover{border-color:var(--black);color:var(--black)}
 .disclaimer{font-size:11px;color:rgba(10,10,10,.3);margin-top:20px;line-height:1.7;padding:12px 16px;border:2px dashed rgba(10,10,10,.12);border-radius:8px;max-width:620px;font-family:var(--M)}
-
-/* ══ BOTTOM NAV ══ */
 .bnav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:4px solid var(--black);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:14px;z-index:500}
 .bnav.hidden{display:none}
 .bn-left{display:flex;align-items:center;gap:14px}
@@ -414,8 +236,6 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
 .bn-info{font-family:var(--M);font-size:11px;letter-spacing:2px;color:rgba(10,10,10,.3);text-transform:uppercase}
 .next-b{background:var(--black);color:#fff;border:none;border-radius:8px;padding:13px 36px;font-family:var(--F);font-size:20px;letter-spacing:1.5px;cursor:pointer;transition:all .18s;box-shadow:4px 4px 0 rgba(0,0,0,.2);font-weight:900}
 .next-b:hover{background:var(--red)}
-
-/* ══ SHARE MODAL ══ */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:800;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)}
 .modal-bg.open{display:flex}
 .modal-card{background:var(--white);border:4px solid var(--black);border-radius:20px;max-width:380px;width:100%;overflow:hidden;box-shadow:10px 10px 0 var(--black)}
@@ -432,11 +252,8 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
 .mc-copy:hover{background:#c01020}
 .mc-close{flex:1;background:transparent;color:var(--black);border:2.5px solid rgba(10,10,10,.2);border-radius:8px;padding:11px;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--B);transition:all .17s}
 .mc-close:hover{background:var(--black);color:#fff;border-color:var(--black)}
-
-/* CONFETTI */
 .cp{position:fixed;pointer-events:none;z-index:9000;border-radius:2px;animation:cfDrop 2.4s ease-out forwards}
 @keyframes cfDrop{0%{transform:translateY(-20px) rotate(0deg) scale(1);opacity:1}100%{transform:translateY(110vh) rotate(900deg) scale(.2);opacity:0}}
-
 @media(max-width:700px){
   .map-area{grid-template-columns:1fr;height:auto}
   #map{height:220px}
@@ -451,32 +268,24 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">🎰 LUNCH ROULETTE <span class="nav-pip">LDN</span></div>
   <div class="streak" id="navStreak">🔥 0 DAYS</div>
 </nav>
 
-<!-- STEP BAR -->
 <div class="step-bar">
   <div class="sb-item active" id="sbi-1" onclick="goStep(1)">
-    <div class="sb-num">01</div>
-    <div class="sb-lbl">DIETARY</div>
-    <div class="sb-check">✓</div>
+    <div class="sb-num">01</div><div class="sb-lbl">DIETARY</div><div class="sb-check">✓</div>
   </div>
   <div class="sb-item" id="sbi-2" onclick="goStep(2)">
-    <div class="sb-num">02</div>
-    <div class="sb-lbl">PICK STORE</div>
-    <div class="sb-check">✓</div>
+    <div class="sb-num">02</div><div class="sb-lbl">PICK STORE</div><div class="sb-check">✓</div>
   </div>
   <div class="sb-item" id="sbi-3" onclick="goStep(3)">
-    <div class="sb-num">03</div>
-    <div class="sb-lbl">SPIN</div>
-    <div class="sb-check">🎲</div>
+    <div class="sb-num">03</div><div class="sb-lbl">SPIN</div><div class="sb-check">🎲</div>
   </div>
 </div>
 
-<!-- ═══ STEP 1 ═══ -->
+<!-- STEP 1 -->
 <div class="panel active" id="panel-1">
   <div class="s1-hero dot-bg">
     <div class="dot-bg" style="position:absolute;inset:0;pointer-events:none;opacity:.4"></div>
@@ -506,31 +315,22 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
     </div>
   </div>
 </div>
- <!-- ═══ STEP 2 ═══ -->
+
+<!-- STEP 2 -->
 <div class="panel" id="panel-2">
   <div class="s2-hero">
     <div class="stripe-bg" style="position:absolute;inset:0;pointer-events:none"></div>
     <div class="s2-hero-num">02</div>
-    <div class="s2-eye">Step 02 of 03 — Location & store</div>
+    <div class="s2-eye">Step 02 of 03 — Location &amp; store</div>
     <div class="s2-title">Where are<br>you <em>eating?</em></div>
     <div class="s2-sub">Find stores nearby, or just pick a category. Pin a specific store to lock your spin to it.</div>
   </div>
-
   <div class="mode-toggle">
-    <button class="mt-btn active" data-mode="supermarket" onclick="setMode('supermarket',this)">
-      <span class="mt-icon">🛒</span>Supermarket
-    </button>
-    <button class="mt-btn" data-mode="fastfood" onclick="setMode('fastfood',this)">
-      <span class="mt-icon">🍔</span>Fast Food
-    </button>
-    <button class="mt-btn" data-mode="highstreet" onclick="setMode('highstreet',this)">
-      <span class="mt-icon">☕</span>High Street
-    </button>
-    <button class="mt-btn" data-mode="all" onclick="setMode('all',this)">
-      <span class="mt-icon">🎲</span>Everything
-    </button>
+    <button class="mt-btn active" data-mode="supermarket" onclick="setMode('supermarket',this)"><span class="mt-icon">🛒</span>Supermarket</button>
+    <button class="mt-btn" data-mode="fastfood" onclick="setMode('fastfood',this)"><span class="mt-icon">🍔</span>Fast Food</button>
+    <button class="mt-btn" data-mode="highstreet" onclick="setMode('highstreet',this)"><span class="mt-icon">☕</span>High Street</button>
+    <button class="mt-btn" data-mode="all" onclick="setMode('all',this)"><span class="mt-icon">🎲</span>Everything</button>
   </div>
-
   <div class="store-token-row" id="storeBar"></div>
   <div class="pinned-bar" id="pinnedBar">
     <span class="pb-name" id="pinnedName"></span>
@@ -547,10 +347,8 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
   </div>
 </div>
 
-<!-- ═══ STEP 3 ═══ -->
+<!-- STEP 3 -->
 <div class="panel" id="panel-3">
-
-  <!-- CABINET TOP SECTION -->
   <div class="cabinet-top">
     <div class="bulb-string">
       <div class="bulb b-y"></div><div class="bulb b-r"></div><div class="bulb b-b"></div>
@@ -559,25 +357,19 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
       <div class="bulb b-p"></div>
     </div>
     <div class="cabinet-title-row">
-      <div>
-        <div class="cabinet-title">Spin your<br><em>lunch fate</em></div>
-      </div>
+      <div><div class="cabinet-title">Spin your<br><em>lunch fate</em></div></div>
       <div class="store-badge" id="storeBadge">🎲 ANY STORE</div>
     </div>
   </div>
-
-  <!-- MACHINE BODY -->
   <div class="machine-body">
     <div class="reel-chassis">
       <div class="chassis-label">— MEAL DEAL MACHINE Mk.III —</div>
       <div class="reels">
-        <!-- MAIN REEL -->
         <div class="reel-col">
           <div class="reel-label rl-main">🥪 Main</div>
           <div class="reel-win" id="rw-main">
             <div class="reel-inner" id="ri-main"><div class="reel-ph">🎲</div></div>
-            <div class="reel-sides"></div>
-            <div class="reel-line"></div>
+            <div class="reel-sides"></div><div class="reel-line"></div>
             <div class="spin-ov" id="ov-main"><span class="sov-icon">🌀</span></div>
           </div>
           <div class="reel-ctrls">
@@ -585,13 +377,11 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
             <button class="rb" onclick="respinOne('main')">↻</button>
           </div>
         </div>
-        <!-- MID REEL -->
         <div class="reel-col">
           <div class="reel-label rl-mid" id="midLabel">🍿 Snack</div>
           <div class="reel-win" id="rw-mid">
             <div class="reel-inner" id="ri-mid"><div class="reel-ph">🎲</div></div>
-            <div class="reel-sides"></div>
-            <div class="reel-line"></div>
+            <div class="reel-sides"></div><div class="reel-line"></div>
             <div class="spin-ov" id="ov-mid"><span class="sov-icon">🌀</span></div>
           </div>
           <div class="reel-ctrls">
@@ -599,13 +389,11 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
             <button class="rb" onclick="respinOne('mid')">↻</button>
           </div>
         </div>
-        <!-- DRINK REEL -->
         <div class="reel-col">
           <div class="reel-label rl-drink">🥤 Drink</div>
           <div class="reel-win" id="rw-drink">
             <div class="reel-inner" id="ri-drink"><div class="reel-ph">🎲</div></div>
-            <div class="reel-sides"></div>
-            <div class="reel-line"></div>
+            <div class="reel-sides"></div><div class="reel-line"></div>
             <div class="spin-ov" id="ov-drink"><span class="sov-icon">🌀</span></div>
           </div>
           <div class="reel-ctrls">
@@ -614,7 +402,6 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
           </div>
         </div>
       </div>
-
       <div class="spin-zone">
         <button class="spin-giant" id="spinBtn" onclick="spinAll()">🎲 SPIN</button>
         <button class="chaos-btn" id="chaosBtn" onclick="chaosMode()">🔥 FEELING DANGEROUS</button>
@@ -622,8 +409,6 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
     </div>
     <div class="quip-strip" id="quip">Hit SPIN — your lunch destiny awaits.</div>
   </div>
-
-  <!-- RESULT ZONE -->
   <div class="result-zone" id="resultZone" style="display:none">
     <div class="rz">
       <div class="rz-top">
@@ -669,7 +454,6 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
   </div>
 </div>
 
-<!-- BOTTOM NAV -->
 <div class="bnav" id="bnav">
   <div class="bn-left">
     <button class="back-b" id="backBtn" onclick="goBack()">← Back</button>
@@ -678,7 +462,6 @@ nav{background:var(--black);height:60px;display:flex;align-items:center;justify-
   <button class="next-b" id="nextBtn" onclick="goNext()">Continue →</button>
 </div>
 
-<!-- SHARE MODAL -->
 <div class="modal-bg" id="shareModal" onclick="if(event.target===this)closeShare()">
   <div class="modal-card">
     <div class="mc-head">
@@ -824,6 +607,8 @@ function goStep(n){
   if(n>3)return;
   step=n;
   document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('active',i+1===n));
+  // ★ FIX: 切换到 Step 2 时强制 Leaflet 重新计算地图尺寸
+  if(n===2&&mapObj){setTimeout(()=>mapObj.invalidateSize(),50);}
   [1,2,3].forEach(i=>{
     const el=document.getElementById('sbi-'+i);
     el.className='sb-item'+(i===n?' active':i<n?' done':'');
@@ -896,7 +681,8 @@ function animReel(r,pool,final,delay,cb){
     },80);}
   },iv);
 }
- function spinAll(){
+
+function spinAll(){
   if(spinning)return;
   const bs=getB();
   if(!bs.length){alert('No options match your dietary filters. Try relaxing them!');return;}
@@ -988,20 +774,37 @@ function updateStats(id){
 }
 function renderStreak(){document.getElementById('navStreak').textContent='🔥 '+stats.days+' DAYS';}
 
-// MAP
 function locateMe(){
-  if(!navigator.geolocation){alert('Location not supported');return;}
-  const btn=document.getElementById('locateBtn');btn.textContent='📍 Finding you...';btn.disabled=true;
-  navigator.geolocation.getCurrentPosition(pos=>{
-    btn.textContent='📍 Find stores near me';btn.disabled=false;
-    initMap(pos.coords.latitude,pos.coords.longitude);fetchNearby(pos.coords.latitude,pos.coords.longitude);
-  },err=>{btn.textContent='📍 Find stores near me';btn.disabled=false;alert('Location error: '+err.message);});
+  if(!navigator.geolocation){
+    initMap(51.5074,-0.1278);
+    document.getElementById('sbStatus').textContent='📍 Geolocation not supported — showing London';
+    return;
+  }
+  const btn=document.getElementById('locateBtn');
+  btn.textContent='📡 Locating...';btn.disabled=true;
+  navigator.geolocation.getCurrentPosition(
+    pos=>{
+      btn.textContent='🔄 Refresh location';btn.disabled=false;
+      initMap(pos.coords.latitude,pos.coords.longitude);
+      fetchNearby(pos.coords.latitude,pos.coords.longitude);
+    },
+    err=>{
+      btn.textContent='📍 Find stores near me';btn.disabled=false;
+      initMap(51.5074,-0.1278);
+      document.getElementById('sbStatus').textContent='📍 Location denied — showing London';
+    },
+    {enableHighAccuracy:true,timeout:10000,maximumAge:60000}
+  );
 }
 function initMap(lat,lng){
   if(mapObj){mapObj.remove();mapObj=null;}
-  mapObj=L.map('map').setView([lat,lng],15);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap & CartoDB',maxZoom:19}).addTo(mapObj);
-  L.circleMarker([lat,lng],{radius:9,color:'#F5E432',fillColor:'#F5E432',fillOpacity:1,weight:2}).addTo(mapObj).bindPopup('📍 You');
+  mapObj=L.map('map',{zoomControl:true,attributionControl:false}).setView([lat,lng],15);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
+    attribution:'© OpenStreetMap & CartoDB',maxZoom:19
+  }).addTo(mapObj);
+  L.circleMarker([lat,lng],{
+    radius:10,color:'#F5E432',fillColor:'#F5E432',fillOpacity:1,weight:3
+  }).addTo(mapObj).bindPopup('<b style="font-family:monospace">📍 You are here</b>').openPopup();
 }
 function gEm(n){n=n.toLowerCase();
   if(n.includes('tesco'))return'🔵';if(n.includes('sainsbury'))return'🟠';
@@ -1012,30 +815,75 @@ function gEm(n){n=n.toLowerCase();
   if(n.includes('subway'))return'🥖';if(n.includes('mcdonald'))return'🍟';
   if(n.includes('burger'))return'👑';if(n.includes('kfc'))return'🍗';return'🏪';}
 function fetchNearby(lat,lng){
-  document.getElementById('sbStatus').textContent='Searching...';
-  const q=`[out:json][timeout:15];(node["shop"~"supermarket|convenience|chemist"](around:1500,${lat},${lng});node["amenity"~"fast_food|cafe"](around:1200,${lat},${lng}););out body;`;
+  document.getElementById('sbStatus').textContent='🔍 Searching...';
+  document.getElementById('sbList').innerHTML='<div class="msb-empty">Loading nearby stores...</div>';
+  const q=`[out:json][timeout:20];(
+    node["shop"~"supermarket|convenience|chemist|bakery"](around:1500,${lat},${lng});
+    node["amenity"~"fast_food|cafe"](around:1200,${lat},${lng});
+    node["name"~"Greggs|Pret|Subway|Boots|Tesco|Sainsbury|Waitrose|Morrisons|Asda|Co-op|M&S",i](around:1500,${lat},${lng});
+  );out body;`;
   fetch('https://overpass-api.de/api/interpreter?data='+encodeURIComponent(q))
-    .then(r=>r.json()).then(data=>{
-      const kn=['tesco','sainsbury','co-op','m&s','marks','boots','waitrose','morrisons','asda','pret','greggs','subway','mcdonald','burger king','kfc'];
-      const items=data.elements.filter(e=>{const n=(e.tags?.name||'').toLowerCase();return kn.some(k=>n.includes(k));}).slice(0,10);
+    .then(r=>{if(!r.ok)throw new Error('Network error');return r.json();})
+    .then(data=>{
+      const kn=['tesco','sainsbury','co-op','coop','m&s','marks','boots',
+                'waitrose','morrisons','asda','pret','greggs','subway',
+                'mcdonald','burger king','kfc'];
+      const seen=new Set();
+      const items=data.elements
+        .filter(e=>{
+          const n=(e.tags?.name||'').toLowerCase();
+          const match=kn.some(k=>n.includes(k));
+          if(match&&!seen.has(n)){seen.add(n);return true;}
+          return false;
+        })
+        .map(e=>{
+          const dist=Math.round(Math.sqrt(
+            Math.pow((e.lat-lat)*111000,2)+
+            Math.pow((e.lon-lng)*111000*Math.cos(lat*Math.PI/180),2)
+          ));
+          return{...e,dist};
+        })
+        .sort((a,b)=>a.dist-b.dist)
+        .slice(0,10);
       renderNearby(items,lat,lng);
-    }).catch(()=>{document.getElementById('sbStatus').textContent='Could not load nearby stores'});
+    })
+    .catch(()=>{
+      document.getElementById('sbStatus').textContent='⚠️ Could not load stores';
+      document.getElementById('sbList').innerHTML='<div class="msb-empty">Check your connection and try again</div>';
+    });
 }
 function renderNearby(items,uLat,uLng){
-  if(!items.length){document.getElementById('sbStatus').textContent='No familiar stores found';return;}
-  document.getElementById('sbStatus').textContent=items.length+' stores found';
-  document.getElementById('sbList').innerHTML=items.map(e=>{
-    const dist=Math.round(Math.sqrt(Math.pow((e.lat-uLat)*111000,2)+Math.pow((e.lon-uLng)*111000*Math.cos(uLat*Math.PI/180),2)));
+  if(!items.length){
+    document.getElementById('sbStatus').textContent='No familiar stores nearby';
+    document.getElementById('sbList').innerHTML='<div class="msb-empty">No Meal Deal stores found within 1.5km 😕</div>';
+    return;
+  }
+  document.getElementById('sbStatus').textContent=items.length+' stores found nearby';
+  document.getElementById('sbList').innerHTML=items.map((e,i)=>{
     const name=e.tags?.name||'Store';
-    return`<div class="msb-item" data-lat="${e.lat}" data-lng="${e.lon}" onclick="selNearby(this,'${name.replace(/'/g,"\\'")}')">
+    return`<div class="msb-item" data-lat="${e.lat}" data-lng="${e.lon}"
+      onclick="selNearby(this,'${name.replace(/'/g,"\\'")}')">
       <div class="msb-ico">${gEm(name)}</div>
-      <div class="msb-info"><h5>${name}</h5><p>${e.tags?.['addr:street']||''}</p></div>
-      <div class="msb-dist">${dist<1000?dist+'m':(dist/1000).toFixed(1)+'km'}</div>
+      <div class="msb-info">
+        <h5>${i===0?'⭐ ':''}${name}</h5>
+        <p>${e.tags?.['addr:street']||e.tags?.['addr:suburb']||'Tap to pin'}</p>
+      </div>
+      <div class="msb-dist">${e.dist<1000?e.dist+'m':(e.dist/1000).toFixed(1)+'km'}</div>
     </div>`;
   }).join('');
-  items.forEach(e=>{
-    L.marker([e.lat,e.lon],{icon:L.divIcon({className:'',html:`<div style="background:#0A0A0A;border:2px solid #F5E432;border-radius:5px;padding:3px 8px;font-size:11px;font-weight:700;color:#F5E432;white-space:nowrap">${gEm(e.tags?.name||'')} ${e.tags?.name||'Store'}</div>`,iconAnchor:[0,0]})}).addTo(mapObj);
+  items.forEach((e,i)=>{
+    const name=e.tags?.name||'Store';
+    L.marker([e.lat,e.lon],{icon:L.divIcon({
+      className:'',
+      html:`<div style="background:#0A0A0A;border:2px solid ${i===0?'#F5E432':'rgba(255,255,255,0.25)'};border-radius:5px;padding:3px 8px;font-size:11px;font-weight:700;color:${i===0?'#F5E432':'rgba(255,255,255,0.55)'};white-space:nowrap">${gEm(name)} ${name}</div>`,
+      iconAnchor:[0,0]
+    })}).addTo(mapObj)
+      .bindPopup(`<b>${gEm(name)} ${name}</b><br><small>${e.dist}m away</small>`);
   });
+  try{
+    const coords=[[uLat,uLng],...items.map(e=>[e.lat,e.lon])];
+    mapObj.fitBounds(coords,{padding:[30,30],maxZoom:16});
+  }catch(e){}
 }
 function selNearby(el,name){
   document.querySelectorAll('.msb-item').forEach(i=>i.classList.remove('sel'));el.classList.add('sel');
